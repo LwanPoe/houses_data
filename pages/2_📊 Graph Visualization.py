@@ -1,4 +1,3 @@
-import tkinter
 import streamlit as st
 import pandas as pd
 import utils as ul
@@ -18,7 +17,7 @@ def draw_graph(df):
         st.bar_chart(rslt_df.Number)
     
 st.subheader("Data Visualization with Chart 📊")
-#file_path = "C:\\Users\\Nwe Ni\\Desktop\\Python\\house.csv" 
+
 try:
     df = ul.read_file().rename(columns = {'Name' : 'index'}).set_index('index') 
     draw_graph(df)
