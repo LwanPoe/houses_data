@@ -21,7 +21,7 @@ def draw_table(df):
         st.markdown("The corresponding data does not exist. Please choose at least one condition.")
 
     else:
-        st.write(rslt_df[['Name', 'Number of Burned Down Houses', 'Date']])
+        st.write(rslt_df[['Name', 'Number of Burned Down Houses', 'Date', 'Region']])
         for index, row in rslt_df.iterrows():
             total_houses += row['Number of Burned Down Houses']
         st.write("Total Burned down houses (estimate) :  " + str(total_houses))     
