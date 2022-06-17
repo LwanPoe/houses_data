@@ -13,7 +13,7 @@ def select_condition(df):
     col1, col2 = st.columns(2)
     with col1:
         #Choose Region
-        slct_rgn = st.multiselect("Choose Region:", list(df.Region.unique()), [df.Region.unique()[0]])
+        slct_rgn = st.multiselect("Choose Region:", list(df.Region.unique()))
         rslt_df = df[df['Region'].isin(slct_rgn)]
      
     with col2:
