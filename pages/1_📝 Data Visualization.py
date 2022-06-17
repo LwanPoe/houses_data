@@ -4,6 +4,30 @@ import utils as ul
 from urllib.error import URLError
 st.subheader("Data Visualization with Table 📝")
 
+def select_condition(df):
+    #Month mapping
+    mm = { 1: 'January', 2: 'February', 3: 'March', 4: 'April', 5: 'May',
+          6: 'June', 7: 'July', 8: 'August', 9: 'September', 10: 'October',
+          11: 'November', 12: 'December' }
+    df['Month'] = pd.DatetimeIndex(df['Date']).month.map(mm)
+    col1, col2 = st.columns(2)
+    with col1:
+        #Choose Region
+        slct_rgn = st.multiselect("Choose Region:", list(df.Region.unique()), [df.Region.unique()[0]])
+        rslt_df = df[df['Region'].isin(slct_rgn)]
+     
+    with col2:
+        #Choose Month        
+        slct_mnt = st.multiselect("Choose Month:", list(df.Month.unique()), [df.Month.unique()[0]])
+        if rslt_df.empty:
+            rslt_df = df[df['Month'].isin(slct_mnt)]
+        else:
+            rslt_df = rslt_df[rslt_df['Month'].isin(slct_mnt)]
+            if rslt_df.empty:
+                rslt_df = df[df['Region'].isin(slct_rgn)]
+                
+    return  rslt_df
+
 # read data from csv  
 
 def draw_table(df):
@@ -16,7 +40,7 @@ def draw_table(df):
     <br><br>
     ''', unsafe_allow_html = True)
 
-    rslt_df = ul.select_condition(df)
+    rslt_df = select_condition(df)
     if rslt_df.empty :
         st.markdown("The corresponding data does not exist. Please choose at least one condition.")
 
