@@ -7,31 +7,6 @@ def read_file():
     df = pd.read_csv(file_path)
     df = df.dropna()
     return df
-
-def select_condition(df):
-    #Month mapping
-    mm = { 1: 'January', 2: 'February', 3: 'March', 4: 'April', 5: 'May',
-          6: 'June', 7: 'July', 8: 'August', 9: 'September', 10: 'October',
-          11: 'November', 12: 'December' }
-    df['Month'] = pd.DatetimeIndex(df['Date']).month.map(mm)
-    col1, col2 = st.columns(2)
-    with col1:
-        #Choose Region
-        slct_rgn = st.multiselect("Choose Region:", list(df.Region.unique()), [df.Region.unique()[0]])
-        rslt_df = df[df['Region'].isin(slct_rgn)]
-     
-    with col2:
-        #Choose Month        
-        slct_mnt = st.multiselect("Choose Month:", list(df.Month.unique()), [df.Month.unique()[0]])
-        if rslt_df.empty:
-            rslt_df = df[df['Month'].isin(slct_mnt)]
-        else:
-            rslt_df = rslt_df[rslt_df['Month'].isin(slct_mnt)]
-            if rslt_df.empty:
-                rslt_df = df[df['Region'].isin(slct_rgn)]
-                
-    return  rslt_df
-
         
 def read_local_data():
     data = {
