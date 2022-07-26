@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import utils as ul
 from urllib.error import URLError
-st.subheader("Data Visualization with Table 📝")
+st.subheader("Data Visualization with Table")
 
 def select_condition(df):
     #Month mapping
@@ -42,7 +42,7 @@ def draw_table(df):
 
     rslt_df = select_condition(df)
     if rslt_df.empty :
-        st.markdown("The corresponding data does not exist. Please choose at least one condition.")
+        st.write(df[['Name', 'Number of Burned Down Houses', 'Date', 'Region']])
 
     else:
         st.write(rslt_df[['Name', 'Number of Burned Down Houses', 'Date', 'Region']])
