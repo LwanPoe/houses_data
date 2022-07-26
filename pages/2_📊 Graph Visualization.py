@@ -40,7 +40,7 @@ def draw_graph(df):
     else:
         st.bar_chart(rslt_df.Number)
     
-st.subheader("Data Visualization with Chart 📊")
+st.subheader("Data Visualization with Chart")
 
 try:
     df = ul.read_file().rename(columns = {'Name' : 'index'}).set_index('index') 
